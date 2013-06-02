@@ -1,0 +1,4 @@
+<% f.children.each do |z| %>
+          <% next if z.name =~ /(distance|featured|latitude|longitude|has_video|has_offers|impression_id|public_id|business_operation_status|scorecard|has_menu)/ %>
+          <% "#{z.name} : #{z.text}" %> <br />
+        <% end %>
