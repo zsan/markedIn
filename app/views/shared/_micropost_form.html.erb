@@ -1,7 +1,17 @@
-<%= form_for(@micropost) do |f| %>
+<%= form_for(@micropost, html: { multipart: true}) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
-    <%= f.text_area :content, placeholder: "Compose new micropost..." %>
+    <%= f.text_field :title, placeholder: "Nama tempat" %>
   </div>
+  <div class="field">
+    <%= f.text_area :content, placeholder: "Alasan mengapa harus di tandai ..." %>
+  </div>
+  
+  <%= f.fields_for :postimages do |postimage_form| %>
+    <div class="field">
+      <%= postimage_form.file_field :image %>
+    </div>
+  <% end %>  
+
   <%= f.submit "Post", class: "btn btn-large btn-primary" %>
 <% end %>

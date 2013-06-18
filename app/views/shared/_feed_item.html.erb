@@ -1,13 +1,24 @@
 <li id="<%= feed_item.id %>">
-  <%= link_to gravatar_for(feed_item.user), feed_item.user %>
-  <span class="user">
-    <%= link_to feed_item.user.name, feed_item.user %>
-  </span>
-  <span class="content"><%= feed_item.content %></span>
-  <span class="timestamp">
-    Posted <%= time_ago_in_words(feed_item.created_at) %> ago.
-  </span>
-  <% if current_user?(feed_item.user) %>
-    <%= link_to "delete", feed_item, method: :delete, confirm: "You Sure?" %>
-  <% end %>
+  <div class="row">
+    <div class="span1">
+      <% feed_item.postimages.each do |img| %>
+        <span class="user"><%= image_tag img.image_url(:thumb) %></span>
+      <% end %>
+    </div>
+    <div class="span7">
+      <span class="user">
+        <%= link_to feed_item.user.name, feed_item.user %>
+      </span>
+      <span class="title"><p class="lead"><%= feed_item.title %></p></span>
+      <span class="content"><%= feed_item.content %></span>
+      <span class="timestamp">
+        Posted <%= time_ago_in_words(feed_item.created_at) %> ago.
+      </span>
+      <% if current_user?(feed_item.user) %>
+        <span class="content">
+        <%= link_to "delete", feed_item, method: :delete, confirm: "You Sure?", class: "btn-small btn-danger" %>
+      </span>
+      <% end %>
+    </div>
+  </div>
 </li>
