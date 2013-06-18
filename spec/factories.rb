@@ -11,7 +11,14 @@ FactoryGirl.define do
   end
 
   factory :micropost do
-  	content "Lorem ipsum"
+  	content "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum"
+    title "Lorem ipsum"
   	user
+  end
+
+  factory :postimage do
+    content "image 1"
+    image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'images','places', 'image.jpg')) }
+    micropost
   end
 end

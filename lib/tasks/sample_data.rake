@@ -28,8 +28,14 @@ end
 def make_microposts
   users = User.all(limit: 6)
   50.times do
-    content = Faker::Lorem.sentence(5)
-    users.each { |user| user.microposts.create!(content: content) }
+    content = Faker::Lorem.paragraph
+    title   = Faker::Lorem.words(3)
+    users.each do |user| 
+      micropost = user.microposts.create!(content: content, title: title) 
+      image = Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'images','places', 'image.jpg')) 
+
+      micropost.postimages.create!(image: image)
+    end
   end
 end
 
